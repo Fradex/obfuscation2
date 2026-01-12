@@ -1,5 +1,6 @@
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.DebugInfo;
 using ICSharpCode.Decompiler.Metadata;
 
 namespace ObfuscationTool;
@@ -23,7 +24,8 @@ internal static class Decompiler
         var decompiler = new WholeProjectDecompiler(
             settings,
             resolver,
-            new AssemblyReferenceClassifier(resolver));
+            new AssemblyReferenceClassifier(),
+            DebugInfoProvider.Empty);
         decompiler.DecompileProject(peFile, outputDir);
     }
 }
