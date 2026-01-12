@@ -20,7 +20,10 @@ internal static class Decompiler
 
         var resolver = new UniversalAssemblyResolver(assemblyPath, false, null);
         var peFile = new PEFile(assemblyPath);
-        var decompiler = new WholeProjectDecompiler(resolver, settings);
+        var decompiler = new WholeProjectDecompiler(
+            settings,
+            resolver,
+            new AssemblyReferenceClassifier(resolver));
         decompiler.DecompileProject(peFile, outputDir);
     }
 }
